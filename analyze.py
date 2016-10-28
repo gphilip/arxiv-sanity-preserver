@@ -33,6 +33,8 @@ for pid,j in db.iteritems():
     else:
       print 'skipped %d/%d (%s) with %d chars: suspicious!' % (n, len(db), idvv, len(txt))
 
+print 'About to compute tfidf vectors.'
+
 # compute tfidf vectors with scikits
 v = TfidfVectorizer(input='content', 
         encoding='utf-8', decode_error='replace', strip_accents='unicode', 
@@ -41,7 +43,9 @@ v = TfidfVectorizer(input='content',
         ngram_range=(1, 2), max_features = 20000, 
         norm='l2', use_idf=True, smooth_idf=True, sublinear_tf=False)
 
+print 'About to fit transform.'
 X = v.fit_transform(txts)
+
 print v.vocabulary_
 print X.shape
 

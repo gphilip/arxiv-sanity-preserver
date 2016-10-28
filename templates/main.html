@@ -3,7 +3,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Arxiv Sanity Preserver</title>
+<title>Arxiv Browser: Data Structures and Algorithms</title>
 
 <!-- MathJax -->
 <script type="text/x-mathjax-config">
@@ -60,7 +60,7 @@ function build_ocoins_str(p) {
   var ocoins_info = {
     "ctx_ver": "Z39.88-2004",
     "rft_val_fmt": "info:ofi/fmt:kev:mtx:journal",
-    "rfr_id": "info:sid/arxiv-sanity.com:arxiv-sanity",
+    "rfr_id": "info:sid/arxiv.gphilip.in:arxiv",
 
     "rft_id": p.link,
     "rft.atitle": p.title,
@@ -289,7 +289,6 @@ $(document).ready(function(){
 </head>
 
 <body>
-<a href="https://github.com/karpathy/arxiv-sanity-preserver"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 <div id ="titdiv">
 
@@ -305,16 +304,17 @@ $(document).ready(function(){
     </form>
     {% else %}
     {{ g.user.username }}
-    <a href="{{ url_for('logout') }}">log out</a>
-    {% endif %}
+    <a href="{{ url_for('logout') }}">log out</a><br>
+    {% endif %}<br>
+    Last updated: {{ modtime }}
   </div>
-
+  
   <!-- Site information/banner on top left -->
 	<a href="/">
 	<div id="tittxt">
-		<h1>Arxiv Sanity Preserver</h1>
-		Built by <a href="https://twitter.com/karpathy">@karpathy</a> to accelerate research.<br>
-		Serving last {{ totpapers }} papers from cs.[CV|CL|LG|AI|NE]/stat.ML
+		<h1><font size=3>Arxiv Browser for Data Structures and Algorithms</font></h1>
+		Based on <a href="https://github.com/karpathy/arxiv-sanity-preserver">Arxiv Sanity Preserver</a> by <a href="https://twitter.com/karpathy">@karpathy</a>. <br>
+		Serving the last {{ totpapers }} papers from cs.DS.  
 	</div>
 	</a>
 </div>
@@ -330,13 +330,6 @@ $(document).ready(function(){
     {% endif %}
 {% endwith %}
 </div>
-
-{% if render_format == "recent" and g.user.username is not defined %}
-<div id="banner">
-  <div style="float:right;cursor:pointer;" id="xbanner">X</div>
-  New to arxiv-sanity? Check out the <a href="https://youtu.be/S2GY3gh6qC8" target="_blank">introduction video</a>.
-</div>
-{% endif %}
 
 <div id="sbox">
   <form action="/search" method="get">
